@@ -1,0 +1,31 @@
+services:
+  postgres:
+    image: postgres:latest
+    hostname: db
+    ports: [5432:5432]
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+
+  policy-service:
+    image: 'ruby:3.3'
+    hostname: app
+    working_dir: /app
+    volumes:
+      - .:/app
+      - rubygems:/usr/local/bundle
+    ports: [3001:3001]
+    depends_on:
+      postgres:
+        condition: service_healthy
+    tty: true
+    stdin_open: true
+
+volumes:
+  rubygems:
