@@ -12,7 +12,9 @@ services:
       timeout: 3s
       retries: 5
     volumes:
-    - database:/var/lib/postgresql/data
+      - database:/var/lib/postgresql/data
+    networks:
+      - my-bridge
 
   policy-service:
     image: 'ruby:3.3'
@@ -28,7 +30,13 @@ services:
         condition: service_healthy
     tty: true
     stdin_open: true
+    networks:
+      - my-bridge
 
 volumes:
   database:
   rubygems:
+
+networks:
+  my-bridge:
+    name: my-bridge
