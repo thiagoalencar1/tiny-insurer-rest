@@ -38,3 +38,178 @@ FOREIGN KEY ("vehicle_id")
   [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
   [1m[35m (0.6ms)[0m  [1m[34mSELECT pg_advisory_unlock(5277929974492897470)[0m
   [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mInsured Create (1.8ms)[0m  [1m[32mINSERT INTO "insureds" ("name", "cpf", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "id"[0m  [["name", "João da Silva"], ["cpf", "001.002.003-90"], ["created_at", "2024-02-26 00:12:50.050129"], ["updated_at", "2024-02-26 00:12:50.050129"]]
+  [1m[36mTRANSACTION (5.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mVehicle Create (1.6ms)[0m  [1m[32mINSERT INTO "vehicles" ("plate", "brand", "model", "year", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["plate", "QQY:9E72"], ["brand", "Hyunday"], ["model", "HB20 Sense"], ["year", 2002], ["created_at", "2024-02-26 00:16:00.614088"], ["updated_at", "2024-02-26 00:16:00.614088"]]
+  [1m[36mTRANSACTION (6.1ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInsured Load (0.3ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" ORDER BY "insureds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mInsured Load (0.6ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" ORDER BY "insureds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mInsured Load (0.7ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" ORDER BY "insureds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mVehicle Load (0.6ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" ORDER BY "vehicles"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mInsured Load (0.7ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" ORDER BY "insureds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" ORDER BY "vehicles"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mPolicy Create (2.3ms)[0m  [1m[32mINSERT INTO "policies" ("insured_at", "insured_until", "insured_id", "vehicle_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6) RETURNING "id"[0m  [["insured_at", "2024-02-26 00:18:30.399390"], ["insured_until", "2025-02-26 00:18:30.399391"], ["insured_id", 1], ["vehicle_id", 1], ["created_at", "2024-02-26 00:18:58.970821"], ["updated_at", "2024-02-26 00:18:58.970821"]]
+  [1m[36mTRANSACTION (5.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInsured Load (0.6ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" ORDER BY "insureds"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+Started GET "/" for 172.27.0.1 at 2024-02-26 11:06:36 +0000
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.4ms | Allocations: 374)
+Completed 200 OK in 22ms (Views: 10.1ms | ActiveRecord: 0.0ms | Allocations: 5682)
+
+
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:06:43 +0000
+Processing by PoliciesController#index as HTML
+Completed 404 Not Found in 1ms (ActiveRecord: 0.0ms | Allocations: 172)
+
+
+  
+AbstractController::ActionNotFound (The destroy action could not be found for the :set_policy
+callback on PoliciesController, but it is listed in the controller's
+:only option.
+
+Raising for missing callback actions is a new default in Rails 7.1, if you'd
+like to turn this off you can delete the option from the environment configurations
+or set `config.action_controller.raise_on_missing_callback_actions` to `false`.
+):
+  
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:62:in `match?'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:426:in `block in make_lambda'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:182:in `block (2 levels) in halting_and_conditional'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:182:in `all?'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:182:in `block in halting_and_conditional'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:598:in `block in invoke_before'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:598:in `each'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:598:in `invoke_before'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:109:in `run_callbacks'
+actionpack (7.1.3.2) lib/abstract_controller/callbacks.rb:258:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/rescue.rb:25:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:74:in `block in process_action'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `block in instrument'
+activesupport (7.1.3.2) lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+activesupport (7.1.3.2) lib/active_support/notifications.rb:206:in `instrument'
+actionpack (7.1.3.2) lib/action_controller/metal/instrumentation.rb:73:in `process_action'
+actionpack (7.1.3.2) lib/action_controller/metal/params_wrapper.rb:261:in `process_action'
+activerecord (7.1.3.2) lib/active_record/railties/controller_runtime.rb:32:in `process_action'
+actionpack (7.1.3.2) lib/abstract_controller/base.rb:160:in `process'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:227:in `dispatch'
+actionpack (7.1.3.2) lib/action_controller/metal.rb:309:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:49:in `dispatch'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:51:in `block in serve'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:131:in `block in find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `each'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:124:in `find_routes'
+actionpack (7.1.3.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (7.1.3.2) lib/action_dispatch/routing/route_set.rb:882:in `call'
+rack (3.0.9.1) lib/rack/etag.rb:29:in `call'
+rack (3.0.9.1) lib/rack/conditional_get.rb:31:in `call'
+rack (3.0.9.1) lib/rack/head.rb:15:in `call'
+activerecord (7.1.3.2) lib/active_record/migration.rb:655:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+activesupport (7.1.3.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/actionable_exceptions.rb:16:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/debug_exceptions.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (7.1.3.2) lib/rails/rack/logger.rb:37:in `call_app'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `block in tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:39:in `tagged'
+activesupport (7.1.3.2) lib/active_support/tagged_logging.rb:135:in `tagged'
+activesupport (7.1.3.2) lib/active_support/broadcast_logger.rb:240:in `method_missing'
+railties (7.1.3.2) lib/rails/rack/logger.rb:24:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/remote_ip.rb:92:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/request_id.rb:28:in `call'
+rack (3.0.9.1) lib/rack/runtime.rb:24:in `call'
+activesupport (7.1.3.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:59:in `block in call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:24:in `collect_events'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/server_timing.rb:58:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/static.rb:25:in `call'
+rack (3.0.9.1) lib/rack/sendfile.rb:114:in `call'
+actionpack (7.1.3.2) lib/action_dispatch/middleware/host_authorization.rb:141:in `call'
+railties (7.1.3.2) lib/rails/engine.rb:536:in `call'
+puma (6.4.2) lib/puma/configuration.rb:272:in `call'
+puma (6.4.2) lib/puma/request.rb:100:in `block in handle_request'
+puma (6.4.2) lib/puma/thread_pool.rb:378:in `with_force_shutdown'
+puma (6.4.2) lib/puma/request.rb:99:in `handle_request'
+puma (6.4.2) lib/puma/server.rb:464:in `process_client'
+puma (6.4.2) lib/puma/server.rb:245:in `block in run'
+puma (6.4.2) lib/puma/thread_pool.rb:155:in `block in spawn_thread'
+Started GET "/favicon.ico" for 172.27.0.1 at 2024-02-26 11:06:44 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:07:26 +0000
+Processing by PoliciesController#index as HTML
+  [1m[36mPolicy Load (1.3ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 123ms (Views: 59.4ms | ActiveRecord: 19.4ms | Allocations: 23888)
+
+
+  [1m[36mPolicy Load (0.4ms)[0m  [1m[34mSELECT "policies".* FROM "policies" /* loading for pp */ LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mPolicy Load (0.6ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  [1m[36mPolicy Load (0.6ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  [1m[36mInsured Load (0.5ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" WHERE "insureds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPolicy Load (0.6ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPolicy Load (0.5ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+Started GET "/" for 172.27.0.1 at 2024-02-26 11:29:41 +0000
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-7.1.3.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 1.2ms | Allocations: 264)
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.0ms | Allocations: 860)
+
+
+Started GET "/index" for 172.27.0.1 at 2024-02-26 11:29:48 +0000
+  
+ActionController::RoutingError (No route matches [GET] "/index"):
+  
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:30:01 +0000
+Processing by PoliciesController#index as HTML
+  [1m[36mPolicy Load (36.8ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 500 Internal Server Error in 53ms (ActiveRecord: 44.9ms | Allocations: 7676)
+
+
+  
+NoMethodError (undefined method `vechicle' for an instance of Policy):
+  
+app/controllers/policies_controller.rb:5:in `index'
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:30:13 +0000
+Processing by PoliciesController#index as HTML
+  [1m[36mPolicy Load (0.7ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mVehicle Load (0.6ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 74ms (Views: 0.2ms | ActiveRecord: 15.8ms | Allocations: 16257)
+
+
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:30:47 +0000
+Processing by PoliciesController#index as HTML
+  [1m[36mPolicy Load (0.8ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mVehicle Load (0.5ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 6ms (Views: 0.1ms | ActiveRecord: 1.3ms | Allocations: 1190)
+
+
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:33:36 +0000
+Processing by PoliciesController#index as HTML
+  [1m[36mPolicy Load (0.8ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mInsured Load (0.9ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" WHERE "insureds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 64ms (Views: 0.2ms | ActiveRecord: 18.9ms | Allocations: 14808)
+
+
