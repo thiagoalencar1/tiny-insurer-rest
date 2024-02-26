@@ -6,14 +6,14 @@ class PoliciesController < ApplicationController
   end
 
   def show
-    render json: @policy
+    render json: @policy.to_json(include: [:insured, :vehicle])
   end
 
   def create
     @policy = Policy.new(policy_params)
 
     if policy.save
-      render json: @policy, status: created, location: @policy
+      render json: @policy, status: :created, location: @policy
     else
       render json: @policy.errors, status: :unprocessable_entity
     end
