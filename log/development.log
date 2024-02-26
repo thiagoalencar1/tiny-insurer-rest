@@ -213,3 +213,39 @@ Processing by PoliciesController#index as HTML
 Completed 200 OK in 64ms (Views: 0.2ms | ActiveRecord: 18.9ms | Allocations: 14808)
 
 
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:37:24 +0000
+Processing by PoliciesController#index as */*
+  [1m[36mPolicy Load (0.7ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mInsured Load (0.6ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" WHERE "insureds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 9ms (Views: 0.2ms | ActiveRecord: 1.7ms | Allocations: 1834)
+
+
+Started POST "/policy" for 172.27.0.1 at 2024-02-26 11:40:40 +0000
+  
+ActionController::RoutingError (No route matches [POST] "/policy"):
+  
+Started POST "/policies" for 172.27.0.1 at 2024-02-26 11:41:35 +0000
+Processing by PoliciesController#create as */*
+Completed 400 Bad Request in 0ms (ActiveRecord: 0.0ms | Allocations: 136)
+
+
+  
+ActionController::ParameterMissing (param is missing or the value is empty: policy):
+  
+app/controllers/policies_controller.rb:41:in `policy_params'
+app/controllers/policies_controller.rb:13:in `create'
+Started GET "/policies" for 172.27.0.1 at 2024-02-26 11:43:13 +0000
+Processing by PoliciesController#index as */*
+  [1m[36mPolicy Load (46.7ms)[0m  [1m[34mSELECT "policies".* FROM "policies"[0m
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mInsured Load (0.5ms)[0m  [1m[34mSELECT "insureds".* FROM "insureds" WHERE "insureds"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+  [1m[36mVehicle Load (0.4ms)[0m  [1m[34mSELECT "vehicles".* FROM "vehicles" WHERE "vehicles"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/policies_controller.rb:5:in `index'
+Completed 200 OK in 57ms (Views: 0.1ms | ActiveRecord: 56.7ms | Allocations: 4641)
+
+

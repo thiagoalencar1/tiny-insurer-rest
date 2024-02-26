@@ -38,6 +38,6 @@ class PoliciesController < ApplicationController
   end
 
   def policy_params
-    params.require(:policy).permit(:title, :description, :completed)
+    params.require(:policy).permit(:insured_at, :insured_until, :insured, :vechicle)
   end
 end
