@@ -32,6 +32,21 @@ services:
     stdin_open: true
     networks:
       - my-bridge
+    command: bash -c "rails s -b 0.0.0.0 -p 3001"
+  
+  workers:
+    image: 'ruby:3.3'
+    env_file:
+      - .env
+    working_dir: /app
+    command: bash -c "WORKERS=PolicyWorker rake sneakers:run"
+    networks:
+      - my-bridge
+    volumes:
+      - .:/app
+      - rubygems:/usr/local/bundle
+    depends_on:
+      - policy-service
 
 volumes:
   database:
