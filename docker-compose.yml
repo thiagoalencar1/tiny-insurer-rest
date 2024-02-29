@@ -4,8 +4,6 @@ services:
     ports: [5432:5432]
     env_file:
       - .env
-    environment:
-      TZ: America/Sao_Paulo
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 3s
@@ -18,12 +16,12 @@ services:
 
   policy-service:
     image: 'ruby:3.3'
+    env_file:
+      - .env
     working_dir: /app
     volumes:
       - .:/app
       - rubygems:/usr/local/bundle
-    env_file:
-      - .env
     ports: [3001:3001]
     depends_on:
       postgres:
@@ -32,14 +30,14 @@ services:
     stdin_open: true
     networks:
       - my-bridge
-    command: bash -c "rails s -b 0.0.0.0 -p 3001"
+    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && rails s -b 0.0.0.0 -p 3001"
   
   workers:
     image: 'ruby:3.3'
     env_file:
       - .env
     working_dir: /app
-    command: bash -c "WORKERS=PolicyWorker rake sneakers:run"
+    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && WORKERS=PolicyWorker rake sneakers:run"
     networks:
       - my-bridge
     volumes:

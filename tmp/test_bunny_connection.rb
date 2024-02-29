@@ -5,7 +5,7 @@ conn = Bunny.new(hostname: 'rabbitmq', username: 'admin', password: 'admin').sta
 ch = conn.create_channel
 ch.confirm_select
 
-q = ch.queue("policy_created", durable: true)
+q = ch.queue("create_policy", durable: true)
 
 q.subscribe(manual_ack: true) do |delivery_info, metadata, payload| 
   puts "This is the message: #{payload}"
