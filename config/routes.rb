@@ -10,5 +10,5 @@ Rails.application.routes.draw do
 
   resources :policies
   resources :vehicles
-  resources :insured
+  resources :insureds
 end
