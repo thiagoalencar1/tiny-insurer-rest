@@ -5,7 +5,7 @@ require "json"
 
 class PolicyWorker
   include Sneakers::Worker
-  from_queue "policy_created"
+  from_queue "create_policy"
 
   def work(msg)
     puts "::::::::: MESSAGE RECEIVED :::::::::"
