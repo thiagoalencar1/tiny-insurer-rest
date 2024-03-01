@@ -1,4 +1,4 @@
-class PoliciesController < ApplicationController
+class V1::PoliciesController < ApplicationController
   before_action :set_policy, only: [:show, :update, :destroy]
   def index
     @policies = Policy.all

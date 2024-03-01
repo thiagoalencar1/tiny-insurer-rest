@@ -1,4 +1,4 @@
-class InsuredsController < ApplicationController
+class V1::InsuredsController < ApplicationController
   def index
     @insureds = Insured.all
     render json: @insureds
