@@ -1,24 +1,25 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## DESCRIPTION
+Tiny Insurer App is a learning process in messaging (with RabbitMQ) and graphql topics.
 
-Things you may want to cover:
+The app simulates an Insurer Company that receive Insured and Vehicle informations and emmit an insured policy to the client.
 
-* Ruby version
+This is a two part app that needs to run side-by-side.
+The second-parte is here: [Tiny Insurer App - GraphQL Interface](https://github.com/thiagoalencar1/tiny-insurer-graphql).
 
-* System dependencies
+## STACK
+- Docker
+- Ruby 3.3.0
+- Rails 7.1.3.2
+- Rspec
+- Bunny
+- pry-byebug
+- Postgres
 
-* Configuration
+## REQUIREMENTS
+- Docker
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## RUN
+## ENDPOINTS AND PAYLOAD
+## TESTS
