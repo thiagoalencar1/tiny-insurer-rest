@@ -31,6 +31,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
   gem "pry-byebug"
   gem "rspec-rails"
+  gem "factory_bot_rails"
 end
 
 group :development do
