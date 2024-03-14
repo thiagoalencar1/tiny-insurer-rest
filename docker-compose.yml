@@ -1,6 +1,7 @@
 services:
   postgres:
     image: postgres:15
+    container_name: tiny-insurer-db
     ports: [5432:5432]
     env_file:
       - .env
@@ -16,6 +17,7 @@ services:
 
   policy-service:
     image: 'ruby:3.3'
+    container_name: tiny-insurer-rest
     env_file:
       - .env
     working_dir: /app
@@ -34,6 +36,7 @@ services:
   
   workers:
     image: 'ruby:3.3'
+    container_name: tiny-insurer-workers
     env_file:
       - .env
     working_dir: /app
