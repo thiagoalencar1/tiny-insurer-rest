@@ -10,6 +10,7 @@ Rails.application.configure do
     ENV["SERVER_HOST_NAME"],
     "http://policy-service:3001/",
     "policy-service:3001",
+    "tiny-insurer-rest"
   ]
   # In the development environment your application's code is reloaded any time
   # it changes. This slows down response time but is perfect for development
