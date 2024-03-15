@@ -1,20 +1,22 @@
+# frozen_string_literal: true
+
 class V1::PoliciesController < ApplicationController
   before_action :set_policy, only: [:show, :update, :destroy]
   before_action :authenticate_request
 
   def index
-    @policies = Policy.all
-    render json: @policies.to_json(include: [:insured, :vehicle])
+    @policies = Policy.all.includes(:insured, :vehicle)
+    render json: @policies, include: [:insured, :vehicle]
   end
 
   def show
-    render json: @policy.to_json(include: [:insured, :vehicle])
+    render json: @policy, include: [:insured, :vehicle]
   end
 
   def create
     @policy = Policy.new(policy_params)
 
-    if policy.save
+    if @policy.save
       render json: @policy, status: :created, location: @policy
     else
       render json: @policy.errors, status: :unprocessable_entity
@@ -40,14 +42,14 @@ class V1::PoliciesController < ApplicationController
   end
 
   def policy_params
-    params.require(:policy).permit(:insured_at, :insured_until, :insured, :vechicle)
+    params.require(:policy).permit(:insured_at, :insured_until, :insured, :vehicle)
   end
 
   def authenticate_request
     header = request.headers['Authorization']
     token = header.split(' ').last if header
     begin
-      decode_token = JWT.decode(token, 'secret', true, { algorithm: 'HS256' })
+      JWT.decode(token, 'secret', true, algorithm: 'HS256')
     rescue JWT::DecodeError => e
       render json: { errors: e.message }, status: :unauthorized
     end

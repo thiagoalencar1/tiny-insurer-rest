@@ -1,3 +1,5 @@
 /log/
 .vscode/
 tmp/pids/
+
+.byebug_history
