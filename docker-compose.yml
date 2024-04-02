@@ -32,7 +32,7 @@ services:
     stdin_open: true
     networks:
       - my-bridge
-    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && rails s -b 0.0.0.0 -p 3001"
+    # command: bash -c "rm -f tmp/pids/server.pid && bin/setup && rails s -b 0.0.0.0 -p 3001"
   
   workers:
     image: 'ruby:3.3'
@@ -40,7 +40,9 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && WORKERS=PolicyWorker rake sneakers:run"
+    tty: true
+    stdin_open: true
+    # command: bash -c "rm -f tmp/pids/server.pid && bin/setup && WORKERS=PolicyWorker rake sneakers:run"
     networks:
       - my-bridge
     volumes:

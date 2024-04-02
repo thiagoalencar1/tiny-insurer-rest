@@ -25,6 +25,7 @@ class PolicyWorker
       policy = Policy.create!(
         insured_at: policy_data[:insured_at],
         insured_until: policy_data[:insured_until],
+        status: policy_data[:status],
         insured: insured,
         vehicle: vehicle
       )

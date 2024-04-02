@@ -5,7 +5,7 @@ class V1::PoliciesController < ApplicationController
   before_action :authenticate_request
 
   def index
-    @policies = Policy.all.includes(:insured, :vehicle)
+    @policies = Policy.all.includes(:insured, :vehicle).sort_by(&:id)
     render json: @policies, include: [:insured, :vehicle]
   end
 
@@ -36,13 +36,13 @@ class V1::PoliciesController < ApplicationController
   end
 
   private
-
+ 
   def set_policy
     @policy = Policy.find(params[:id])
   end
 
   def policy_params
-    params.require(:policy).permit(:insured_at, :insured_until, :insured, :vehicle)
+    params.require(:policy).permit(:insured_at, :insured_until, :status, :insured, :vehicle)
   end
 
   def authenticate_request
