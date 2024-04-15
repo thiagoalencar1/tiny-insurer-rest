@@ -26,6 +26,8 @@ class PolicyWorker
         insured_at: policy_data[:insured_at],
         insured_until: policy_data[:insured_until],
         status: policy_data[:status],
+        payment_id: policy_data[:payment_id],
+        payment_link: policy_data[:payment_link],
         insured: insured,
         vehicle: vehicle
       )

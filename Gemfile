@@ -40,3 +40,4 @@ end
 # Project gems
 gem "jwt", "~> 2.8"
 gem "sneakers"
+gem "stripe"

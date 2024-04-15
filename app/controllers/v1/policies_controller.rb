@@ -42,7 +42,7 @@ class V1::PoliciesController < ApplicationController
   end
 
   def policy_params
-    params.require(:policy).permit(:insured_at, :insured_until, :status, :insured, :vehicle)
+    params.require(:policy).permit(:insured_at, :insured_until, :status, :payment_id, :payment_link, :insured, :vehicle)
   end
 
   def authenticate_request
