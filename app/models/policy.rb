@@ -4,6 +4,8 @@ class Policy < ApplicationRecord
 
   accepts_nested_attributes_for :insured, :vehicle
 
+  enum status: { pending: 0, active: 1 }
+
   validates :insured_at,    presence: true
   validates :insured_until, presence: true
   validates :insured_id,    presence: true

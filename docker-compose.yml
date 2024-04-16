@@ -33,6 +33,12 @@ services:
     networks:
       - my-bridge
     command: bash -c "rm -f tmp/pids/server.pid && bin/setup && rails s -b 0.0.0.0 -p 3001"
+    # healthcheck:
+    
+    #   test: ["CMD-SHELL", "curl", "-I", "http://localhost:3001/up"]
+    #   interval: 5s
+    #   timeout: 5s
+    #   retries: 5
   
   workers:
     image: 'ruby:3.3'
@@ -40,7 +46,9 @@ services:
     env_file:
       - .env
     working_dir: /app
-    command: bash -c "rm -f tmp/pids/server.pid && bin/setup && WORKERS=PolicyWorker rake sneakers:run"
+    tty: true
+    stdin_open: true
+    command: bash -c "rm -f tmp/pids/server.pid && WORKERS=PolicyWorker,PaymentWorker rake sneakers:run"
     networks:
       - my-bridge
     volumes:
