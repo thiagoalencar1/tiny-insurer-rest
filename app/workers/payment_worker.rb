@@ -13,7 +13,7 @@ class PaymentWorker
 
     ActiveRecord::Base.connection_pool.with_connection do
       policy = Policy.find_by(payment_id: policy_data[:payment_id])
-      policy = Policy.update!(status: 'active')
+      policy.update!(status: 'active')
 
       puts "######### PAYMENT UPDATED #########"
       p policy
