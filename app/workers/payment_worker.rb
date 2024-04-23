@@ -18,6 +18,13 @@ class PaymentWorker
       puts "######### PAYMENT UPDATED #########"
       p policy
 
+      # Notify success payment to backoffice
+      url = URI("http://tiny-insurer-web:3000/fast_confirm")
+      body = policy.to_json
+      header = { 'Content-Type': 'application/json' }
+
+      Net::HTTP.post(url, body, header)
+
       ack!
     end
   rescue StandardError => e
