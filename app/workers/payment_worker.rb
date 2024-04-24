@@ -19,7 +19,8 @@ class PaymentWorker
       p policy
 
       # Notify success payment to backoffice
-      url = URI("http://tiny-insurer-web:3000/fast_confirm")
+      binding.pry
+      url = URI(ENV['LIVE_CONFIRMATION_URL'])
       body = policy.to_json
       header = { 'Content-Type': 'application/json' }
 
