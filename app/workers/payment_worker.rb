@@ -18,6 +18,14 @@ class PaymentWorker
       puts "######### PAYMENT UPDATED #########"
       p policy
 
+      # Notify success payment to backoffice
+      binding.pry
+      url = URI(ENV['LIVE_CONFIRMATION_URL'])
+      body = policy.to_json
+      header = { 'Content-Type': 'application/json' }
+
+      Net::HTTP.post(url, body, header)
+
       ack!
     end
   rescue StandardError => e
