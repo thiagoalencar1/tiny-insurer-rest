@@ -19,7 +19,6 @@ class PaymentWorker
       p policy
 
       # Notify success payment to backoffice
-      binding.pry
       url = URI(ENV['LIVE_CONFIRMATION_URL'])
       body = policy.to_json
       header = { 'Content-Type': 'application/json' }
